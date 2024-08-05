@@ -8,7 +8,6 @@ function UrlForm({setUrls, urls}) {
   const handleSubmit = e => {
     e.preventDefault();
     const newUrl = {
-      id: Date.now(),
       long_url: urlToShorten,
       title: title
     };
