@@ -1,7 +1,12 @@
 export const getUrls = () => {
   return fetch('http://localhost:3001/api/v1/urls')
-      .then(response => response.json())
-      .catch(error => console.error('Error fetching API data:', error))
+    .then(response => {
+      if(!response.ok) {
+        throw new Error (`HTTP error! Status: ${response.status}`)
+      }
+      return response.json();
+    })
+    .catch(error => console.error('Error fetching the data:', error))
 }
 
 export const postUrls = newUrl => {
@@ -12,6 +17,11 @@ export const postUrls = newUrl => {
     },
     body: JSON.stringify(newUrl)
   })
-  .then(response => response.json())
-  .catch(error => console.error('Error posting URL:', error))
+  .then(response => {
+    if(!response.ok) {
+      throw new Error (`HTTP error! Status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .catch(error => console.error('Error with POST:', error))
 }
