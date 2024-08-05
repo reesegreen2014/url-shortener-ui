@@ -7,6 +7,10 @@ function UrlForm({setUrls, urls}) {
 
   const handleSubmit = e => {
     e.preventDefault();
+    if(!title || !urlToShorten) {
+      alert('Please fill out both fields');
+      return;
+    }
     const newUrl = {
       long_url: urlToShorten,
       title: title
@@ -32,6 +36,7 @@ function UrlForm({setUrls, urls}) {
         name='title'
         value={title}
         onChange={e => setTitle(e.target.value)}
+        required
       />
 
       <input
@@ -40,6 +45,7 @@ function UrlForm({setUrls, urls}) {
         name='urlToShorten'
         value={urlToShorten}
         onChange={e => setUrlToShorten(e.target.value)}
+        required
       />
 
       <button onClick={e => handleSubmit(e)}>
