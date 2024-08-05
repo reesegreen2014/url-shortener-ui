@@ -17,7 +17,7 @@ function App () {
     <main className="App">
       <header>
         <h1>URL Shortener</h1>
-        <UrlForm />
+        <UrlForm setUrls={setUrls} urls={urls}/>
       </header>
 
       <UrlContainer urls={urls}/>

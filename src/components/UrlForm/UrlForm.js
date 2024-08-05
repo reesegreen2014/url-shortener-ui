@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
+import { postUrls } from '../../apiCalls';
 
-function UrlForm() {
+function UrlForm({setUrls, urls}) {
   const [title, setTitle] = useState('');
   const [urlToShorten, setUrlToShorten] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
-    clearInputs();
+    const newUrl = {
+      id: Date.now(),
+      long_url: urlToShorten,
+      title: title
+    };
+    postUrls(newUrl)
+    .then(data => {
+      setUrls([...urls, data])
+      clearInputs()
+    })
+    .catch(error => console.error('Error posting url', error))
   }
 
   const clearInputs = () => {
